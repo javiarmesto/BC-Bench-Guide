@@ -3,7 +3,7 @@
 <!--
 Template for documenting BC-Bench evaluation results.
 Fill in the sections below after each evaluation run.
-Guide reference: docs/guide/05-resultados-y-analisis.md
+Guide reference: es/05-resultados-y-analisis.md (or en/05-results-and-analysis.md)
 -->
 
 ## Metadata

@@ -14,11 +14,11 @@ Una guia practica paso a paso para evaluar agentes de codificacion sobre tareas 
 ## Choose your language / Elige tu idioma
 
 <div style="display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
-  <a href="en/01-introduction" style="display: block; padding: 2rem; border: 2px solid var(--border); border-radius: 8px; text-align: center; flex: 1; min-width: 200px; text-decoration: none;">
+  <a href="{{ '/en/01-introduction.html' | relative_url }}" style="display: block; padding: 2rem; border: 2px solid var(--border); border-radius: 8px; text-align: center; flex: 1; min-width: 200px; text-decoration: none;">
     <strong style="font-size: 1.5rem;">English</strong><br>
     <span>Start the guide in English</span>
   </a>
-  <a href="es/01-introduccion" style="display: block; padding: 2rem; border: 2px solid var(--border); border-radius: 8px; text-align: center; flex: 1; min-width: 200px; text-decoration: none;">
+  <a href="{{ '/es/01-introduccion.html' | relative_url }}" style="display: block; padding: 2rem; border: 2px solid var(--border); border-radius: 8px; text-align: center; flex: 1; min-width: 200px; text-decoration: none;">
     <strong style="font-size: 1.5rem;">Espanol</strong><br>
     <span>Empezar la guia en espanol</span>
   </a>
@@ -39,11 +39,11 @@ BC-Bench is an **open-source benchmarking framework** by Microsoft for evaluatin
 
 | # | English | Espanol |
 |---|---------|---------|
-| 1 | [Introduction](en/01-introduction) | [Introduccion](es/01-introduccion) |
-| 2 | [Setup & First Evaluation](en/02-setup-and-first-evaluation) | [Setup y Primera Evaluacion](es/02-setup-y-primera-evaluacion) |
-| 3 | [Agent Configuration](en/03-agent-configuration) | [Configuracion de Agentes](es/03-configuracion-de-agentes) |
-| 4 | [Baselines & VM Scripts](en/04-baselines-and-vm-scripts) | [Baselines y Scripts VM](es/04-baselines-y-scripts-vm) |
-| 5 | [Results & Analysis](en/05-results-and-analysis) | [Resultados y Analisis](es/05-resultados-y-analisis) |
+| 1 | [Introduction](en/01-introduction.md) | [Introduccion](es/01-introduccion.md) |
+| 2 | [Setup & First Evaluation](en/02-setup-and-first-evaluation.md) | [Setup y Primera Evaluacion](es/02-setup-y-primera-evaluacion.md) |
+| 3 | [Agent Configuration](en/03-agent-configuration.md) | [Configuracion de Agentes](es/03-configuracion-de-agentes.md) |
+| 4 | [Baselines & VM Scripts](en/04-baselines-and-vm-scripts.md) | [Baselines y Scripts VM](es/04-baselines-y-scripts-vm.md) |
+| 5 | [Results & Analysis](en/05-results-and-analysis.md) | [Resultados y Analisis](es/05-resultados-y-analisis.md) |
 
 ## Quick Start
 
