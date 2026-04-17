@@ -6,7 +6,7 @@
     Evaluates one dataset entry with one agent and one scenario.
     Designed for first-time users following the BC-Bench guide.
 
-    Guide reference: docs/guide/04-baselines-y-scripts-vm.md
+    Guide reference: es/04-baselines-y-scripts-vm.md (or en/04-baselines-and-vm-scripts.md)
 .PARAMETER InstanceId
     Dataset entry ID to evaluate (e.g., "microsoft__BCApps-4822").
 .PARAMETER Agent

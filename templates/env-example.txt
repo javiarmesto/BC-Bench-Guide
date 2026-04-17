@@ -1,6 +1,6 @@
 # BC-Bench Environment Variables
 # Copy this file to .env in the BC-Bench root and fill in your values.
-# Guide reference: docs/guide/02-setup-y-primera-evaluacion.md
+# Guide reference: es/02-setup-y-primera-evaluacion.md (or en/02-setup-and-first-evaluation.md)
 
 # ============================================================================
 # AGENT API KEYS (at least one required depending on which agent you evaluate)

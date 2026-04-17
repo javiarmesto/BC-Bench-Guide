@@ -4,6 +4,13 @@ theme: minima
 baseurl: "/bc-bench-guide"
 url: ""
 
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: false
+
 defaults:
   - scope:
       path: "en"

@@ -7,7 +7,7 @@
 # To use: copy this file over src/bcbench/agent/shared/config.yaml
 # before running the evaluation. Restore the original afterward.
 #
-# Guide reference: docs/guide/03-configuracion-de-agentes.md
+# Guide reference: es/03-configuracion-de-agentes.md (or en/03-agent-configuration.md)
 # =====================================================================
 
 prompt:
