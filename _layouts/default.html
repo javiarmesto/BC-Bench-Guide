@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ page.lang | default: 'en' }}">
 <head>
   <meta charset="utf-8">
@@ -232,7 +232,7 @@
     body { transition: background 0.25s ease, color 0.25s ease; }
     header { position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 20px rgba(0,0,0,0.2); }
     .site-title { font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.4rem; }
-    .site-title::before { content: "âš¡"; font-size: 0.9rem; }
+    .site-title::before { content: "\26A1"; font-size: 0.9rem; }
     .lang-switcher a { padding: 0.25rem 0.6rem; border-radius: 6px; transition: all 0.2s; color: rgba(255,255,255,0.82); }
     .lang-switcher a:hover { color: #fff; background: rgba(255,255,255,0.12); text-decoration: none; }
     .lang-switcher strong { color: #fff; }
@@ -306,7 +306,7 @@
     <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
     <div class="header-controls">
       {% include lang-switcher.html %}
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">ðŸŒ™ Dark</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙 Dark</button>
     </div>
   </header>
 
@@ -324,9 +324,9 @@
       </nav>
       {% elsif page.lang == "es" %}
       <nav class="nav-links">
-        <a href="{{ site.baseurl }}/es/01-introduccion/">1. IntroducciÃ³n</a>
+        <a href="{{ site.baseurl }}/es/01-introduccion/">1. Introducción</a>
         <a href="{{ site.baseurl }}/es/02-setup-y-primera-evaluacion/">2. Setup</a>
-        <a href="{{ site.baseurl }}/es/03-configuracion-de-agentes/">3. ConfiguraciÃ³n</a>
+        <a href="{{ site.baseurl }}/es/03-configuracion-de-agentes/">3. Configuración</a>
         <a href="{{ site.baseurl }}/es/04-baselines-y-scripts-vm/">4. Baselines y VM</a>
         <a href="{{ site.baseurl }}/es/05-resultados-y-analisis/">5. Resultados</a>
       </nav>
@@ -364,22 +364,22 @@
       {% elsif page.lang == "es" %}
         {% if page.permalink == "/es/01-introduccion/" %}
           {% assign next_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign next_title = "Setup y Primera EvaluaciÃ³n" %}
+          {% assign next_title = "Setup y Primera Evaluación" %}
         {% elsif page.permalink == "/es/02-setup-y-primera-evaluacion/" %}
           {% assign prev_url = site.baseurl | append: "/es/01-introduccion/" %}
-          {% assign prev_title = "IntroducciÃ³n" %}
+          {% assign prev_title = "Introducción" %}
           {% assign next_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign next_title = "ConfiguraciÃ³n de Agentes" %}
+          {% assign next_title = "Configuración de Agentes" %}
         {% elsif page.permalink == "/es/03-configuracion-de-agentes/" %}
           {% assign prev_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign prev_title = "Setup y Primera EvaluaciÃ³n" %}
+          {% assign prev_title = "Setup y Primera Evaluación" %}
           {% assign next_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
           {% assign next_title = "Baselines y Scripts VM" %}
         {% elsif page.permalink == "/es/04-baselines-y-scripts-vm/" %}
           {% assign prev_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign prev_title = "ConfiguraciÃ³n de Agentes" %}
+          {% assign prev_title = "Configuración de Agentes" %}
           {% assign next_url = site.baseurl | append: "/es/05-resultados-y-analisis/" %}
-          {% assign next_title = "Resultados y AnÃ¡lisis" %}
+          {% assign next_title = "Resultados y Análisis" %}
         {% elsif page.permalink == "/es/05-resultados-y-analisis/" %}
           {% assign prev_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
           {% assign prev_title = "Baselines y Scripts VM" %}
