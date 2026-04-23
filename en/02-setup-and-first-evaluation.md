@@ -2,6 +2,7 @@
 layout: default
 title: "Part 2 — Setup"
 lang: en
+permalink: /en/02-setup-and-first-evaluation/
 ---
 
 # BC-Bench: Step-by-Step Guide

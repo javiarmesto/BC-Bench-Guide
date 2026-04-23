@@ -2,6 +2,7 @@
 layout: default
 title: "Parte 1 — Introduccion"
 lang: es
+permalink: /es/01-introduccion/
 ---
 
 # BC-Bench: Guia Paso a Paso

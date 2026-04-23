@@ -2,6 +2,7 @@
 layout: default
 title: "Part 4 — Baselines & VM"
 lang: en
+permalink: /en/04-baselines-and-vm-scripts/
 ---
 
 # BC-Bench: Step-by-Step Guide

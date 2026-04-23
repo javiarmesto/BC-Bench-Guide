@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "BC-Bench Guide"
+permalink: /
 ---
 
 # BC-Bench Guide
@@ -14,11 +15,11 @@ Una guia practica paso a paso para evaluar agentes de codificacion sobre tareas 
 ## Choose your language / Elige tu idioma
 
 <div style="display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
-  <a href="{{ '/en/01-introduction' | relative_url }}" class="lang-button">
+  <a href="{{ site.baseurl }}/en/01-introduction/" class="lang-button">
     <strong style="font-size: 1.5rem;">English</strong><br>
     <span>Start the guide in English</span>
   </a>
-  <a href="{{ '/es/01-introduccion' | relative_url }}" class="lang-button">
+  <a href="{{ site.baseurl }}/es/01-introduccion/" class="lang-button">
     <strong style="font-size: 1.5rem;">Español</strong><br>
     <span>Empezar la guia en español</span>
   </a>

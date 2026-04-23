@@ -2,6 +2,7 @@
 layout: default
 title: "Part 1 — Introduction"
 lang: en
+permalink: /en/01-introduction/
 ---
 
 # BC-Bench: Step-by-Step Guide

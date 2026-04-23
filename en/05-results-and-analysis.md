@@ -2,6 +2,7 @@
 layout: default
 title: "Part 5 — Results"
 lang: en
+permalink: /en/05-results-and-analysis/
 ---
 
 # BC-Bench: Step-by-Step Guide

@@ -2,6 +2,7 @@
 layout: default
 title: "Part 3 — Configuration"
 lang: en
+permalink: /en/03-agent-configuration/
 ---
 
 # BC-Bench: Step-by-Step Guide
