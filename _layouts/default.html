@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{{ page.lang | default: 'en' }}">
 <head>
   <meta charset="utf-8">
@@ -35,6 +35,15 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
       --shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
       --shadow-lg: 0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+      /* Light theme header & surface tokens */
+      --header-bg: #0550ae;
+      --header-text: #ffffff;
+      --code-bg: #f6f8fa;
+      --border: #d0d7de;
+      --nav-bg: #f6f8fa;
+      --table-stripe: #f6f8fa;
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.3);
     }
     :root[data-theme="dark"] {
       --bg: #0d1117;
@@ -223,8 +232,8 @@
     body { transition: background 0.25s ease, color 0.25s ease; }
     header { position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 20px rgba(0,0,0,0.2); }
     .site-title { font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.4rem; }
-    .site-title::before { content: "⚡"; font-size: 0.9rem; }
-    .lang-switcher a { padding: 0.25rem 0.6rem; border-radius: 6px; transition: all 0.2s; color: rgba(255,255,255,0.72); }
+    .site-title::before { content: "âš¡"; font-size: 0.9rem; }
+    .lang-switcher a { padding: 0.25rem 0.6rem; border-radius: 6px; transition: all 0.2s; color: rgba(255,255,255,0.82); }
     .lang-switcher a:hover { color: #fff; background: rgba(255,255,255,0.12); text-decoration: none; }
     .lang-switcher strong { color: #fff; }
     /* Fluid typography */
@@ -297,7 +306,7 @@
     <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
     <div class="header-controls">
       {% include lang-switcher.html %}
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙 Dark</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">ðŸŒ™ Dark</button>
     </div>
   </header>
 
@@ -315,9 +324,9 @@
       </nav>
       {% elsif page.lang == "es" %}
       <nav class="nav-links">
-        <a href="{{ site.baseurl }}/es/01-introduccion/">1. Introducción</a>
+        <a href="{{ site.baseurl }}/es/01-introduccion/">1. IntroducciÃ³n</a>
         <a href="{{ site.baseurl }}/es/02-setup-y-primera-evaluacion/">2. Setup</a>
-        <a href="{{ site.baseurl }}/es/03-configuracion-de-agentes/">3. Configuración</a>
+        <a href="{{ site.baseurl }}/es/03-configuracion-de-agentes/">3. ConfiguraciÃ³n</a>
         <a href="{{ site.baseurl }}/es/04-baselines-y-scripts-vm/">4. Baselines y VM</a>
         <a href="{{ site.baseurl }}/es/05-resultados-y-analisis/">5. Resultados</a>
       </nav>
@@ -355,251 +364,22 @@
       {% elsif page.lang == "es" %}
         {% if page.permalink == "/es/01-introduccion/" %}
           {% assign next_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign next_title = "Setup y Primera Evaluación" %}
+          {% assign next_title = "Setup y Primera EvaluaciÃ³n" %}
         {% elsif page.permalink == "/es/02-setup-y-primera-evaluacion/" %}
           {% assign prev_url = site.baseurl | append: "/es/01-introduccion/" %}
-          {% assign prev_title = "Introducción" %}
+          {% assign prev_title = "IntroducciÃ³n" %}
           {% assign next_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign next_title = "Configuración de Agentes" %}
+          {% assign next_title = "ConfiguraciÃ³n de Agentes" %}
         {% elsif page.permalink == "/es/03-configuracion-de-agentes/" %}
           {% assign prev_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign prev_title = "Setup y Primera Evaluación" %}
+          {% assign prev_title = "Setup y Primera EvaluaciÃ³n" %}
           {% assign next_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
           {% assign next_title = "Baselines y Scripts VM" %}
         {% elsif page.permalink == "/es/04-baselines-y-scripts-vm/" %}
           {% assign prev_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign prev_title = "Configuración de Agentes" %}
+          {% assign prev_title = "ConfiguraciÃ³n de Agentes" %}
           {% assign next_url = site.baseurl | append: "/es/05-resultados-y-analisis/" %}
-          {% assign next_title = "Resultados y Análisis" %}
-        {% elsif page.permalink == "/es/05-resultados-y-analisis/" %}
-          {% assign prev_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
-          {% assign prev_title = "Baselines y Scripts VM" %}
-        {% endif %}
-      {% endif %}
-      {% if prev_url != "" or next_url != "" %}
-      <nav class="page-nav">
-        {% if prev_url != "" %}
-        <a href="{{ prev_url }}" class="page-nav-btn page-nav-prev">
-          <span class="page-nav-direction">&larr; Previous</span>
-          <span class="page-nav-title">{{ prev_title }}</span>
-        </a>
-        {% else %}<div></div>{% endif %}
-        {% if next_url != "" %}
-        <a href="{{ next_url }}" class="page-nav-btn page-nav-next">
-          <span class="page-nav-direction">Next &rarr;</span>
-          <span class="page-nav-title">{{ next_title }}</span>
-        </a>
-        {% endif %}
-      </nav>
-      {% endif %}
-
-      <footer>
-        BC-Bench Guide &mdash; <a href="https://github.com/microsoft/BC-Bench">BC-Bench on GitHub</a>
-      </footer>
-    </div>
-
-    <aside class="toc-sidebar">
-      <div class="toc-inner">
-        <p class="toc-heading">On this page</p>
-        <nav id="toc-nav"></nav>
-      </div>
-    </aside>
-  </div>
-
-  {% else %}
-  <div class="container-home">
-    {{ content }}
-    <footer>
-      BC-Bench Guide &mdash; <a href="https://github.com/microsoft/BC-Bench">BC-Bench on GitHub</a>
-    </footer>
-  </div>
-  {% endif %}
-
-  <script>
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-
-    /* ---- Theme ---- */
-    function initTheme() {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      html.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
-      updateThemeIcon();
-    }
-    function updateThemeIcon() {
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      themeToggle.textContent = isDark ? '\u2600\uFE0F Light' : '\uD83C\uDF19 Dark';
-    }
-    function toggleTheme() {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateThemeIcon();
-    }
-    themeToggle.addEventListener('click', toggleTheme);
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        updateThemeIcon();
-      }
-    });
-    initTheme();
-
-    /* ---- Reading progress bar ---- */
-    const progressBar = document.getElementById('reading-progress');
-    function updateProgress() {
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0) + '%';
-    }
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
-
-    /* ---- Copy to clipboard ---- */
-    document.querySelectorAll('pre').forEach((pre) => {
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.textContent = 'Copy';
-      btn.addEventListener('click', () => {
-        const code = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          btn.textContent = '\u2713 Copied!';
-          btn.classList.add('copied');
-          setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2200);
-        }).catch(() => { btn.textContent = 'Error'; setTimeout(() => { btn.textContent = 'Copy'; }, 2000); });
-      });
-      pre.appendChild(btn);
-    });
-
-    /* ---- Active nav highlight ---- */
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      try {
-        if (new URL(link.href).pathname === window.location.pathname) link.classList.add('active-nav');
-      } catch(e) {}
-    });
-
-    /* ---- TOC builder + scroll-spy ---- */
-    const tocNav = document.getElementById('toc-nav');
-    if (tocNav) {
-      const headings = document.querySelectorAll('.container h2, .container h3');
-      const tocItems = [];
-      headings.forEach((h, i) => {
-        if (!h.id) h.id = 'h-' + i + '-' + h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        const a = document.createElement('a');
-        a.href = '#' + h.id;
-        a.textContent = h.textContent;
-        a.className = h.tagName === 'H3' ? 'toc-h3' : '';
-        a.addEventListener('click', (e) => { e.preventDefault(); document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-        tocNav.appendChild(a);
-        tocItems.push({ el: h, link: a });
-      });
-      if (tocItems.length > 0) {
-        const spy = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              tocItems.forEach(t => t.link.classList.remove('active'));
-              const found = tocItems.find(t => t.el === entry.target);
-              if (found) found.link.classList.add('active');
-            }
-          });
-        }, { rootMargin: '-8% 0px -78% 0px' });
-        tocItems.forEach(t => spy.observe(t.el));
-      }
-    }
-
-    /* ---- Scroll reveal animations ---- */
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('h2, h3, p, pre, table, blockquote, .lang-button, .stat-pill, .page-nav-btn').forEach(el => {
-      el.classList.add('reveal');
-      revealObserver.observe(el);
-    }ive */
-    @media (max-width: 768px) { header { padding: 0.7rem 1rem; } .container { padding: 1.5rem 1rem 2rem; } .container-home { padding: 0 1rem 2rem; } .page-nav { flex-direction: column; } .page-nav-next { text-align: left; align-items: flex-start; } .hero { padding: 2.5rem 1.25rem 2rem; margin: 1rem 0 2rem; border-radius: 14px; } }
-  </style>
-</head>
-<body>
-  <div id="reading-progress"></div>
-
-  <header>
-    <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
-    <div class="header-controls">
-      {% include lang-switcher.html %}
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙 Dark</button>
-    </div>
-  </header>
-
-  {% if page.lang %}
-  <div class="page-layout">
-    <div class="container">
-
-      {% if page.lang == "en" %}
-      <nav class="nav-links">
-        <a href="{{ site.baseurl }}/en/01-introduction/">1. Introduction</a>
-        <a href="{{ site.baseurl }}/en/02-setup-and-first-evaluation/">2. Setup</a>
-        <a href="{{ site.baseurl }}/en/03-agent-configuration/">3. Configuration</a>
-        <a href="{{ site.baseurl }}/en/04-baselines-and-vm-scripts/">4. Baselines &amp; VM</a>
-        <a href="{{ site.baseurl }}/en/05-results-and-analysis/">5. Results</a>
-      </nav>
-      {% elsif page.lang == "es" %}
-      <nav class="nav-links">
-        <a href="{{ site.baseurl }}/es/01-introduccion/">1. Introducción</a>
-        <a href="{{ site.baseurl }}/es/02-setup-y-primera-evaluacion/">2. Setup</a>
-        <a href="{{ site.baseurl }}/es/03-configuracion-de-agentes/">3. Configuración</a>
-        <a href="{{ site.baseurl }}/es/04-baselines-y-scripts-vm/">4. Baselines y VM</a>
-        <a href="{{ site.baseurl }}/es/05-resultados-y-analisis/">5. Resultados</a>
-      </nav>
-      {% endif %}
-
-      {{ content }}
-
-      {% assign prev_url = "" %}
-      {% assign next_url = "" %}
-      {% assign prev_title = "" %}
-      {% assign next_title = "" %}
-      {% if page.lang == "en" %}
-        {% if page.permalink == "/en/01-introduction/" %}
-          {% assign next_url = site.baseurl | append: "/en/02-setup-and-first-evaluation/" %}
-          {% assign next_title = "Setup & First Evaluation" %}
-        {% elsif page.permalink == "/en/02-setup-and-first-evaluation/" %}
-          {% assign prev_url = site.baseurl | append: "/en/01-introduction/" %}
-          {% assign prev_title = "Introduction" %}
-          {% assign next_url = site.baseurl | append: "/en/03-agent-configuration/" %}
-          {% assign next_title = "Agent Configuration" %}
-        {% elsif page.permalink == "/en/03-agent-configuration/" %}
-          {% assign prev_url = site.baseurl | append: "/en/02-setup-and-first-evaluation/" %}
-          {% assign prev_title = "Setup & First Evaluation" %}
-          {% assign next_url = site.baseurl | append: "/en/04-baselines-and-vm-scripts/" %}
-          {% assign next_title = "Baselines & VM Scripts" %}
-        {% elsif page.permalink == "/en/04-baselines-and-vm-scripts/" %}
-          {% assign prev_url = site.baseurl | append: "/en/03-agent-configuration/" %}
-          {% assign prev_title = "Agent Configuration" %}
-          {% assign next_url = site.baseurl | append: "/en/05-results-and-analysis/" %}
-          {% assign next_title = "Results & Analysis" %}
-        {% elsif page.permalink == "/en/05-results-and-analysis/" %}
-          {% assign prev_url = site.baseurl | append: "/en/04-baselines-and-vm-scripts/" %}
-          {% assign prev_title = "Baselines & VM Scripts" %}
-        {% endif %}
-      {% elsif page.lang == "es" %}
-        {% if page.permalink == "/es/01-introduccion/" %}
-          {% assign next_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign next_title = "Setup y Primera Evaluación" %}
-        {% elsif page.permalink == "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign prev_url = site.baseurl | append: "/es/01-introduccion/" %}
-          {% assign prev_title = "Introducción" %}
-          {% assign next_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign next_title = "Configuración de Agentes" %}
-        {% elsif page.permalink == "/es/03-configuracion-de-agentes/" %}
-          {% assign prev_url = site.baseurl | append: "/es/02-setup-y-primera-evaluacion/" %}
-          {% assign prev_title = "Setup y Primera Evaluación" %}
-          {% assign next_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
-          {% assign next_title = "Baselines y Scripts VM" %}
-        {% elsif page.permalink == "/es/04-baselines-y-scripts-vm/" %}
-          {% assign prev_url = site.baseurl | append: "/es/03-configuracion-de-agentes/" %}
-          {% assign prev_title = "Configuración de Agentes" %}
-          {% assign next_url = site.baseurl | append: "/es/05-resultados-y-analisis/" %}
-          {% assign next_title = "Resultados y Análisis" %}
+          {% assign next_title = "Resultados y AnÃ¡lisis" %}
         {% elsif page.permalink == "/es/05-resultados-y-analisis/" %}
           {% assign prev_url = site.baseurl | append: "/es/04-baselines-y-scripts-vm/" %}
           {% assign prev_title = "Baselines y Scripts VM" %}
@@ -748,3 +528,4 @@
   </script>
 </body>
 </html>
+
