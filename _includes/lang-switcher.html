@@ -6,6 +6,6 @@
     {% assign es_path = page.url | replace: "/en/", "/es/" | replace: "introduction", "introduccion" | replace: "setup-and-first-evaluation", "setup-y-primera-evaluacion" | replace: "agent-configuration", "configuracion-de-agentes" | replace: "baselines-and-vm-scripts", "baselines-y-scripts-vm" | replace: "results-and-analysis", "resultados-y-analisis" %}
     <strong>English</strong> | <a href="{{ es_path | relative_url }}">Espanol</a>
   {% else %}
-    <a href="{{ '/en/01-introduction.html' | relative_url }}">English</a> | <a href="{{ '/es/01-introduccion.html' | relative_url }}">Espanol</a>
+    <a href="{{ '/en/01-introduction/' | relative_url }}">English</a> | <a href="{{ '/es/01-introduccion/' | relative_url }}">Espanol</a>
   {% endif %}
 </nav>
