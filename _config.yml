@@ -1,7 +1,7 @@
 title: "BC-Bench Guide"
 description: "Step-by-step guide for evaluating coding agents on Business Central tasks"
 theme: minima
-baseurl: "/bc-bench-guide"
+baseurl: "/BC-Bench-Guide"
 url: ""
 
 plugins:
