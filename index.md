@@ -2,15 +2,21 @@
 layout: default
 title: "BC-Bench Guide"
 permalink: /
+description: "Step-by-step guide for evaluating coding agents on real Business Central tasks"
 ---
 
-# BC-Bench Guide
-
-A practical step-by-step guide for evaluating coding agents on real **Microsoft Dynamics 365 Business Central** tasks using the [BC-Bench](https://github.com/microsoft/BC-Bench) framework.
-
-Una guia practica paso a paso para evaluar agentes de codificacion sobre tareas reales de **Microsoft Dynamics 365 Business Central** usando el framework [BC-Bench](https://github.com/microsoft/BC-Bench).
-
----
+<div class="hero">
+  <div class="hero-badge">Open Source &middot; GitHub Pages &middot; EN &amp; ES</div>
+  <h1 class="hero-title">BC-Bench Guide</h1>
+  <p class="hero-subtitle">A step-by-step guide to evaluate coding agents on real <strong>Microsoft Dynamics 365 Business Central</strong> tasks using the BC-Bench framework.</p>
+  <div class="hero-stats">
+    <div class="stat-pill">🐛 101 real bugs</div>
+    <div class="stat-pill">🤖 Multi-agent</div>
+    <div class="stat-pill">📊 Statistical metrics</div>
+    <div class="stat-pill">📚 5 chapters</div>
+    <div class="stat-pill">🌐 EN · ES</div>
+  </div>
+</div>
 
 ## Choose your language / Elige tu idioma
 
