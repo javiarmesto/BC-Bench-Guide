@@ -1,5 +1,12 @@
 # BC-Bench Guide / Guia BC-Bench
 
+## Reference and validation / Referencia y validación
+
+Start with [English setup](en/02-setup-and-first-evaluation.md) or [setup en castellano](es/02-setup-y-primera-evaluacion.md), then choose an agent configuration and the report template. `en/`, `es/` and `templates/` are documentation; this repository does not contain the evaluator or a ready-to-run benchmark environment.
+
+Use [Microsoft BC-Bench](https://github.com/microsoft/BC-Bench) as the authoritative source for prerequisites and commands. Pin and record its commit in every evaluation, together with BC version, agent/model, tooling and execution logs. No runtime-validated BC-Bench revision is established by this guide's static review on **6 October 2026**; do not interpret example outputs as measurements. The expected deliverable is your evaluation report with results from an actual run. No applicable license file was confirmed for this guide.
+
+
 A practical step-by-step guide for evaluating coding agents on real **Microsoft Dynamics 365 Business Central** tasks using the **BC-Bench** framework.
 
 Una guia practica paso a paso para evaluar agentes de codificacion sobre tareas reales de **Microsoft Dynamics 365 Business Central** usando el framework **BC-Bench**.
