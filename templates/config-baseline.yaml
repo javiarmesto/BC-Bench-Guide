@@ -1,30 +1,29 @@
-# config-baseline.yaml
-# =====================================================================
-# Baseline configuration: agent with NO custom instructions, NO skills,
-# NO custom agent. This is the "vanilla" setup to establish a baseline
-# performance number for comparison.
-#
-# To use: copy this file over src/bcbench/agent/shared/config.yaml
-# before running the evaluation. Restore the original afterward.
-#
-# Guide reference: es/03-configuracion-de-agentes.md (or en/03-agent-configuration.md)
-# =====================================================================
+# Documentation snapshot, BC-Bench 0.15.0 / c84b793a8a9b7422af9512dfe67baeb2bc666d95
+# Inspect the complete config before use. No runtime validation in this guide.
+judges:
+  code-review:
+    model: "gpt-5.3-codex"
+  lm-checklist:
+    model: "gpt-56-ceres"
 
 prompt:
   include_project_paths: false
+
+  # Input mode for test generation: "problem-statement", "gold-patch", or "both"
+  # - problem-statement: Agent reads bug description, generates tests to reproduce issue => Test driven development
+  # - gold-patch: Agent sees fixed code, generates tests to verify fix works             => Test verification for known fixes
+  # - both: Agent sees both the bug description and the fixed code                       => Combined context for test generation
   test-generation-input: "both"
 
   bug-fix-template: |
     You are working with a Business Central (AL) code repository at {{repo_path}}.
 
-    Task: Fix the issue described below
+    Task: Fix the issue described below {% if include_project_paths %}in the following projects: {{project_paths}}{% endif %}
 
     Important constraints:
     - Do NOT modify any testing logic or test files
     - Focus solely on fixing the reported issue
-    {% if al_mcp %}
-    - Do NOT try to run tests
-    {% else %}
+    {% if not al_mcp %}
     - Do NOT try to build or run tests, just provide the code changes needed
     {% endif %}
     - Do NOT commit any changes to the repository
@@ -36,22 +35,20 @@ prompt:
   test-generation-template: |
     You are working with a Business Central (AL) code repository at {{repo_path}}.
     {% if is_gold_patch and is_problem_statement %}
-    Task: Generate ONE NEW test case that reproduce the issue described below
+    Task: Generate ONE NEW test case that reproduce the issue described below {% if include_project_paths %}in the following projects: {{project_paths}}{% endif %}
       The fix has already been applied as local unstaged changes. Write a test that passes with this fix and would fail without it.
     {% elif is_gold_patch %}
-    Task: Generate ONE NEW test case that verifies the unstaged changes in *.al files
+    Task: Generate ONE NEW test case that verifies the unstaged changes in *.al files {% if include_project_paths %}in the following projects: {{project_paths}}{% endif %}
       The fix has already been applied as local unstaged changes. Write a test that passes with this fix and would fail without it.
     {% else %}
-    Task: Generate ONE NEW test case that reproduce the issue described below
+    Task: Generate ONE NEW test case that reproduce the issue described below {% if include_project_paths %}in the following projects: {{project_paths}}{% endif %}
       The tests should fail against the current codebase (unfixed) and should pass once the issue is fixed.
     {% endif %}
 
     Important constraints:
     - Do NOT modify any production code or existing tests
-    - Focus solely on generating tests
-    {% if al_mcp %}
-    - Do NOT try to run tests
-    {% else %}
+    - Focus solely on generating tests {% if is_gold_patch %}that verify the fix works correctly{% else %}for the reported issue{% endif %}
+    {% if not al_mcp %}
     - Do NOT try to build or run tests, just provide the code changes needed
     {% endif %}
     - Do NOT commit any changes to the repository
@@ -61,18 +58,138 @@ prompt:
     {{task}}
     {% endif %}
 
-# BASELINE: all three disabled
+  extensibility-request-implement-template: |
+    You are working with a Business Central (AL) code repository at {{repo_path}}.
+
+    Task: Implement the extensibility request described below {% if include_project_paths %}in the following projects: {{project_paths}}{% endif %}
+
+    Important constraints:
+    {% if not al_mcp %}
+    - Do NOT try to build or run tests, just provide the code changes needed
+    {% endif %}
+    - Do NOT commit any changes, and do NOT open a pull request
+
+    Extensibility request:
+    {{task}}
+
+  extensibility-request-advisor-template: |
+    Analyze this complete Business Central extensibility scenario against the AL source at {{repo_path}}.
+    Follow your advisor procedure and write the required offline result to `advisor_result.json`.
+
+    Extensibility scenario:
+    {{task}}
+
+  extensibility-request-triage-template: |
+    You are triaging a single Business Central extensibility request. The standard AL source is checked out at {{repo_path}}.
+
+    Task: Triage the extensibility request below and produce your triage decision (managed labels, advisory comment, and open/closed state).
+
+    Important constraints:
+    - This runs offline: read the request from the text below, do NOT call `gh` or touch any live issue.
+    - Do NOT build or run tests; base codebase analysis on the local `.al` files under {{repo_path}}.
+    - Write your final decision as valid JSON to `triage_result.json` in {{repo_path}}, containing exactly the Step 7 `Final_Output` object. Do not apply it through any host tool.
+
+    Extensibility request:
+    {{task}}
+
+  code-review-template: |
+    You are reviewing a Business Central (AL) code repository at {{repo_path}}.
+
+    Review only the staged and unstaged dataset changes in the working tree (`git diff HEAD`). Do not compare commits such as HEAD~1..HEAD or origin/main.
+
+    Important constraints:
+    - Do NOT modify source code, tests, configuration, or any other repository content.
+    - The only file you may create or update is `{{repo_path}}/review.json`.
+    - You MUST write `review.json` before finishing; otherwise the review counts as missing output.
+
+    `review.json` must contain one JSON array. Each finding must be an object with these fields:
+      - `file`: repository-relative `.al` or `.json` path (string, required)
+      - `line_start`: 1-based line where the issue starts (positive integer, required)
+      - `line_end`: 1-based line where the issue ends (positive integer, optional)
+      - `domain`: review domain (string, optional)
+      - `body`: concise description of the issue (non-empty string, required)
+      - `severity`: one of `critical`, `high`, `medium`, or `low` (optional)
+
+    If there are no findings, write an empty array. Write only valid JSON to `review.json`, with no surrounding object, Markdown fence, or commentary.
+
+  data-query-template: |
+    Answer the following Business Central data question using the ACTUAL data from the connected
+    environment. You cannot answer from general knowledge — you must retrieve the real data and report
+    exactly what it returns. Use whatever data-retrieval capabilities are available to you; if the
+    relevant tools are not immediately listed, discover them first (they may be provided as
+    deferred/searchable tools).
+
+    Write two files in {{repo_path}}:
+    - `answer.json`: a JSON array of the result rows that answer the question, one JSON object per row.
+    - `query.al`: the single AL query object you used to obtain the data.
+
+    Question:
+    {{task}}
+
+    You MUST write answer.json before finishing; if you do not, there is no output to evaluate.
+
+# controls:
+# 1. whether to copy custom instructions from `src/bcbench/agent/shared/instructions/<sanitized-repo>/`
+#    - Copilot: copies to repo/.github/ and renames AGENTS.md to copilot-instructions.md
+#    - Claude: copies to repo/.claude/ and renames AGENTS.md to CLAUDE.md
+# 2. whether to pass --disable-custom-instructions to copilot
+# NOTE: this will copy any files in the instructions/<sanitized-repo>/ folder, including skills and custom agents
+# NOTE: the canonical source file is AGENTS.md; it is automatically renamed
+#       to the agent-specific filename (AgentHarness.instruction_filename) during setup
 instructions:
   enabled: false
 
+# controls:
+# 1. whether to copy skills from `src/bcbench/agent/shared/instructions/<sanitized-repo>/skills/`
+#    - Copilot: copies to repo/.github/skills/
+#    - Claude: copies to repo/.claude/skills/
 skills:
   enabled: false
 
+# controls:
+# 1. whether to copy custom agents from `src/bcbench/agent/shared/instructions/<sanitized-repo>/agents/`
+#    - Copilot: copies to repo/.github/agents/
+#    - Claude: copies to repo/.claude/agents/
+# 2. whether to pass --agent=<agent-name> to copilot or claude
 agents:
   enabled: false
+  name: ALTest
+
+# controls loading agent plugins for the run, only enabled entries are validated and loaded.
+# Each plugin gets its own entry, and is passed to the CLI via `--plugin-dir` (session-scoped).
+#   name:     plugin name; also how it is recorded on the result as "<name>@<revision|local>"
+#   enabled:  per-entry toggle (defaults to false)
+#   grant_dir_access: grant the agent read+write access to this plugin's tree via --add-dir (defaults to false)
+#   source:   "local" (a folder on this machine) or "github" (cloned at runtime)
+#   path:     plugin root - for local an absolute path ; for github relative to the clone ("." for its root, or a subfolder when the repo hosts several plugins)
+#   repo:     github only, "owner/repo"
+#   revision: github only, a commit SHA (pinned)
+plugins:
+  - name: "bcbench-example"
+    enabled: false
+    source: local
+    path: "C:/depot/BC-Bench/src/bcbench/agent/shared/plugins/bcbench-example"
+  - name: "superpowers"
+    enabled: false
+    source: github
+    repo: "obra/superpowers"
+    revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"
+    path: "."
+  - name: "BCQuality"
+    enabled: false
+    # grant_dir_access gives BCQuality's skill --add-dir access to read its own knowledge files at
+    # runtime. This is a (hopefully temporary) design that may change once that content is served
+    # via skills / an MCP server instead.
+    grant_dir_access: false
+    source: github
+    repo: "microsoft/BCQuality"
+    revision: "ad8ccde5953fd6ce072e3b59049406783066ed60"
+    path: "."
 
 mcp:
   servers:
+    # AL MCP server (toggled via --al-mcp CLI flag), https://www.nuget.org/packages/Microsoft.Dynamics.BusinessCentral.Development.Tools
+    # NOTE: --assemblyprobingpaths are injected programmatically by mcp.py (requires runtime detection)
     - name: "altool"
       type: "stdio"
       command: "al"
@@ -84,6 +201,33 @@ mcp:
           "--packagecachepath",
           "{{package_cache_path}}",
         ]
-    - name: "mslearn"
+
+    # Business Central MCP server (toggled via --bc-mcp CLI flag). The url is filled in
+    # programmatically by mcp.py to point at a localhost gateway (mcp_gateway.py) that injects auth
+    # upstream, so no credentials appear here. Which tools the server exposes is decided server-side by
+    # the MCP configuration the setup-time AL app provisions.
+    - name: "bcmcp"
       type: "http"
-      url: "https://learn.microsoft.com/api/mcp"
+      url: ""
+
+    # Microsoft Learn MCP: official AL docs + code samples the bc-al-query-mcp skill can ground its AL
+    # syntax in (public server, no auth). Off by default; there is no dispatch flag. To run a
+    # with-vs-without-MS-Learn experiment, UNCOMMENT this block on a private branch — its mere presence
+    # here enables it (build_mcp_config includes whatever MCP servers are listed).
+    # - name: "mslearn"
+    #   type: "http"
+    #   url: "https://learn.microsoft.com/api/mcp"
+
+    # - name: "filesystem"
+    #   type: "stdio"
+    #   command: "npx"
+    #   args: ["-y", "@modelcontextprotocol/server-filesystem", "{{repo_path}}"]
+
+# BC-ALAgents review engine settings for the dedicated pr-review runner. This runner uses
+# the production orchestrator's complete local, non-posting path to measure BC PR Review
+# + BCQuality on the code-review category, including production parsing and filtering.
+# Generic Copilot and Claude runners use code-review-template above on the same category.
+# BC-ALAgents is the harness boundary and its configuration owns the BCQuality version.
+# The evaluation workflow pins BC-ALAgents through install-agent-harnesses.
+pr_review:
+  min_severity: Medium
