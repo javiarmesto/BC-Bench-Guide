@@ -2,67 +2,17 @@
 layout: default
 title: "BC-Bench Guide"
 permalink: /
-description: "Step-by-step guide for evaluating coding agents on real Business Central tasks"
+description: "Evaluación reproducible de agentes para AL y Business Central. EN / ES."
 ---
 
-<div class="hero">
-  <div class="hero-badge">Open Source &middot; GitHub Pages &middot; EN &amp; ES</div>
-  <h1 class="hero-title">BC-Bench Guide</h1>
-  <p class="hero-subtitle">A step-by-step guide to evaluate coding agents on real <strong>Microsoft Dynamics 365 Business Central</strong> tasks using the BC-Bench framework.</p>
-  <div class="hero-stats">
-    <div class="stat-pill">🐛 101 real bugs</div>
-    <div class="stat-pill">🤖 Multi-agent</div>
-    <div class="stat-pill">📊 Statistical metrics</div>
-    <div class="stat-pill">📚 5 chapters</div>
-    <div class="stat-pill">🌐 EN · ES</div>
-  </div>
-</div>
+# BC-Bench Guide
 
-## Choose your language / Elige tu idioma
+## Evaluar para decidir / Evaluate to decide
 
-<div style="display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
-  <a href="{{ site.baseurl }}/en/01-introduction/" class="lang-button">
-    <strong style="font-size: 1.5rem;">English</strong><br>
-    <span>Start the guide in English</span>
-  </a>
-  <a href="{{ site.baseurl }}/es/01-introduccion/" class="lang-button">
-    <strong style="font-size: 1.5rem;">Español</strong><br>
-    <span>Empezar la guia en español</span>
-  </a>
-</div>
+Guía de Javier Armesto basada en [Microsoft BC-Bench](https://github.com/microsoft/BC-Bench). Revisión documental **10.10.2026**, BC-Bench **0.15.0**, commit `c84b793a8a9b7422af9512dfe67baeb2bc666d95`.
 
----
+[Empezar en castellano](es/01-introduccion) · [Start in English](en/01-introduction)
 
-## What is BC-Bench?
+ALDC para desarrollar, BCQuality para conocimiento y revisión, BC-Bench para experimentar. Consulta los cinco capítulos en [el índice del repositorio](https://github.com/javiarmesto/BC-Bench-Guide).
 
-BC-Bench is an **open-source benchmarking framework** by Microsoft for evaluating coding agents (Claude Code, GitHub Copilot CLI, and others) on real-world Business Central (AL) development tasks. It includes:
-
-- **101 real bugs** from the BCApps and NAV repositories
-- **Automated evaluation** with compilation and test execution in BC containers
-- **Configurable agents** with custom instructions, skills, and MCP servers
-- **Statistical metrics** including pass rate, bootstrap CI, and pass@k
-
-## Guide Contents
-
-| # | English | Espanol |
-|---|---------|---------|
-| 1 | [Introduction](en/01-introduction) | [Introduccion](es/01-introduccion) |
-| 2 | [Setup & First Evaluation](en/02-setup-and-first-evaluation) | [Setup y Primera Evaluacion](es/02-setup-y-primera-evaluacion) |
-| 3 | [Agent Configuration](en/03-agent-configuration) | [Configuracion de Agentes](es/03-configuracion-de-agentes) |
-| 4 | [Baselines & VM Scripts](en/04-baselines-and-vm-scripts) | [Baselines y Scripts VM](es/04-baselines-y-scripts-vm) |
-| 5 | [Results & Analysis](en/05-results-and-analysis) | [Resultados y Analisis](es/05-resultados-y-analisis) |
-
-## Quick Start
-
-```bash
-# Install BC-Bench
-gh repo fork microsoft/BC-Bench --clone && cd BC-Bench
-uv python install && uv sync --all-groups
-
-# Explore the dataset
-uv run bcbench dataset list
-uv run bcbench dataset view microsoft__BCApps-4822
-
-# Run your first evaluation (patch only, no container needed)
-uv run bcbench run claude microsoft__BCApps-4822 --category bug-fix --model claude-sonnet-4-6
-```
+Esta actualización no ejecutó benchmarks. Los ejemplos no son mediciones; la generación de un parche no equivale a una evaluación completada. La licencia de esta guía sigue pendiente de aclarar.

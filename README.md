@@ -1,45 +1,33 @@
-# BC-Bench Guide / Guia BC-Bench
+# BC-Bench Guide · EN / ES
 
-## Reference and validation / Referencia y validación
+Guía de Javier Armesto para preparar e interpretar experimentos con agentes en AL y Business Central. **Framework original: [Microsoft BC-Bench](https://github.com/microsoft/BC-Bench).**
 
-Start with [English setup](en/02-setup-and-first-evaluation.md) or [setup en castellano](es/02-setup-y-primera-evaluacion.md), then choose an agent configuration and the report template. `en/`, `es/` and `templates/` are documentation; this repository does not contain the evaluator or a ready-to-run benchmark environment.
+Actualizada el **10 de octubre de 2026** contra BC-Bench **0.15.0**, commit `c84b793a8a9b7422af9512dfe67baeb2bc666d95`. Actualización documental; sin benchmarks ejecutados. Esta guía no contiene el evaluador ni un entorno BC preparado. La licencia de reutilización de esta guía sigue pendiente de aclarar.
 
-Use [Microsoft BC-Bench](https://github.com/microsoft/BC-Bench) as the authoritative source for prerequisites and commands. Pin and record its commit in every evaluation, together with BC version, agent/model, tooling and execution logs. No runtime-validated BC-Bench revision is established by this guide's static review on **6 October 2026**; do not interpret example outputs as measurements. The expected deliverable is your evaluation report with results from an actual run. No applicable license file was confirmed for this guide.
+## Empieza aquí / Start here
 
+| Tema / Topic | Español | English |
+|---|---|---|
+| 1. Introducción | [Leer](es/01-introduccion.md) | [Read](en/01-introduction.md) |
+| 2. Preparación y primera ejecución | [Leer](es/02-setup-y-primera-evaluacion.md) | [Read](en/02-setup-and-first-evaluation.md) |
+| 3. Configuración, plugins y conocimiento | [Leer](es/03-configuracion-de-agentes.md) | [Read](en/03-agent-configuration.md) |
+| 4. Comparaciones e infraestructura | [Leer](es/04-baselines-y-scripts-vm.md) | [Read](en/04-baselines-and-vm-scripts.md) |
+| 5. Resultados y evidencias | [Leer](es/05-resultados-y-analisis.md) | [Read](en/05-results-and-analysis.md) |
 
-A practical step-by-step guide for evaluating coding agents on real **Microsoft Dynamics 365 Business Central** tasks using the **BC-Bench** framework.
+## ALDC + BCQuality + BC-Bench
 
-Una guia practica paso a paso para evaluar agentes de codificacion sobre tareas reales de **Microsoft Dynamics 365 Business Central** usando el framework **BC-Bench**.
+ALDC aporta contexto y flujos de desarrollo; BCQuality aporta conocimiento y revisión con citas; BC-Bench permite comparar configuraciones bajo un contrato de evaluación. Su combinación es un experimento propuesto, no una mejora medida.
 
----
+- [ALDC](https://github.com/javiarmesto/ALDC-AL-Development-Collection): elegir distribución y commit para el harness utilizado.
+- [BCQuality original](https://github.com/microsoft/BCQuality): skills y corpus mantenidos en su fuente.
+- [Fork de Javier](https://github.com/javiarmesto/BCQuality): ampliación `al-knowledge`, identificada como propia del fork.
 
-## English
+## Qué cambió
 
-| Part | Topic |
-|------|-------|
-| [Part 1 — Introduction](en/01-introduction.md) | What is BC-Bench, architecture, key concepts, evaluation flow |
-| [Part 2 — Setup](en/02-setup-and-first-evaluation.md) | Prerequisites, installation, exploring the dataset, first evaluation |
-| [Part 3 — Configuration](en/03-agent-configuration.md) | config.yaml, prompts, instructions, skills, custom agents, MCP |
-| [Part 4 — Baselines & VM](en/04-baselines-and-vm-scripts.md) | VM setup, evaluation scripts, full comparison, ready-to-use examples |
-| [Part 5 — Results](en/05-results-and-analysis.md) | Result structure, CLI commands, metrics, notebooks, reporting |
+Python/uv actualizados; plugins y sus revisiones; configuración por perfiles; categorías ampliadas; BC PR Review; diferencias entre generación de parche y evaluación; Microsoft Learn MCP desactivado por defecto. Retiradas las afirmaciones de dataset fijo, modelos por defecto y agentes de ejemplo supuestamente actuales.
 
-## Espanol
+## Plantillas
 
-| Parte | Tema |
-|-------|------|
-| [Parte 1 — Introduccion](es/01-introduccion.md) | Que es BC-Bench, arquitectura, conceptos clave, flujo de evaluacion |
-| [Parte 2 — Setup](es/02-setup-y-primera-evaluacion.md) | Requisitos, instalacion, explorar dataset, primera evaluacion |
-| [Parte 3 — Configuracion](es/03-configuracion-de-agentes.md) | config.yaml, prompts, instrucciones, skills, agentes custom, MCP |
-| [Parte 4 — Baselines y VM](es/04-baselines-y-scripts-vm.md) | Setup VM, scripts de evaluacion, comparacion completa, ejemplos |
-| [Parte 5 — Resultados](es/05-resultados-y-analisis.md) | Estructura de resultados, CLI, metricas, notebooks, documentacion |
+[Baseline](templates/config-baseline.yaml) y [full](templates/config-full.yaml) preservan el config de la revisión upstream para editar en un experimento. Full activa la copia del perfil, cuyos archivos upstream son placeholders: no instala ALDC. [Script PowerShell](templates/Run-QuickEvaluation.ps1) genera un parche, no lo evalúa. [Informe](templates/evaluation-report-template.md), [cheatsheet](templates/cheatsheet.md) y [.env](templates/env-example.txt).
 
-## Templates
-
-| File | Description |
-|------|-------------|
-| [env-example.txt](templates/env-example.txt) | `.env` template with all variables |
-| [config-baseline.yaml](templates/config-baseline.yaml) | config.yaml for baseline (everything off) |
-| [config-full.yaml](templates/config-full.yaml) | config.yaml for full scenario (everything on) |
-| [Run-QuickEvaluation.ps1](templates/Run-QuickEvaluation.ps1) | PowerShell script ready for VM |
-| [evaluation-report-template.md](templates/evaluation-report-template.md) | Report template for documenting results |
-| [cheatsheet.md](templates/cheatsheet.md) | Quick reference for all CLI commands |
+La versión anterior permanece en el [historial](https://github.com/javiarmesto/BC-Bench-Guide/commits/main). No mezclar instrucciones de revisiones distintas.
